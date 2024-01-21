@@ -1,169 +1,60 @@
-import { Component } from "solid-js"
+import { Component, For, createSignal, onMount } from "solid-js"
+import { createStore } from "solid-js/store"
 import CheckoutItem from "./CheckoutItem"
+import items from "../data/items.json"
+import SporeDiscount from "./SporeDiscount"
+import TotalSummary from "./TotalSummary"
+import { ApplePay, GooglePay, PayPal } from "./PaymentIcons"
+import CreditCardForm from "./CreditCardForm"
+
+export type Items = {
+  id: string
+  thumb_src: string
+  title: string
+  price: number
+  size: string
+  count: number
+}
 
 const Checkout: Component = () => {
-  const items = new Array(3)
+  const [totalPrice, setTotalPrice] = createSignal(
+    items.products.map((p) => p.price * p.count).reduce((a, v) => a + v, 0),
+  )
+  onMount(() => {})
   return (
     <section class="my-10 bg-white">
-      <div class="lg:grid lg:min-h-full lg:grid-cols-12">
+      <div class="border bg-slate-50 lg:grid lg:min-h-full lg:grid-cols-12">
         {/* Order Summary */}
-        <section class="flex max-w-md flex-1 flex-col space-x-6 border bg-slate-50 lg:col-span-5 xl:col-span-5">
+        <section class="flex flex-col space-x-6 bg-slate-50 lg:col-span-5 ">
           <ul
             role="list"
-            class="flex-auto  divide-y overflow-y-auto px-6"
+            class="h-[40rem] flex-auto divide-y overflow-y-auto px-6"
           >
-            <CheckoutItem items={"here"} />
-            <CheckoutItem items={"here"} />
-            <CheckoutItem items={"here"} />
+            <For each={items.products}>{(item) => <CheckoutItem item={item} />}</For>
           </ul>
+          <div class="border-opacity-1 !-ml-px w-full border-t p-6">
+            <SporeDiscount />
+            <TotalSummary total={totalPrice()} />
+          </div>
         </section>
         {/* Payment Section */}
-        <section class="flex max-w-xl border px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-7">
-          <div class="mx-auto max-w-xl">
-            <form
-              action="#"
-              class="mt-8 grid grid-cols-6 gap-6"
-            >
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="FirstName"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  First Name
-                </label>
-
-                <input
-                  type="text"
-                  id="FirstName"
-                  name="first_name"
-                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="LastName"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Last Name
-                </label>
-
-                <input
-                  type="text"
-                  id="LastName"
-                  name="last_name"
-                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6">
-                <label
-                  for="Email"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  {" "}
-                  Email{" "}
-                </label>
-
-                <input
-                  type="email"
-                  id="Email"
-                  name="email"
-                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="Password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  {" "}
-                  Password{" "}
-                </label>
-
-                <input
-                  type="password"
-                  id="Password"
-                  name="password"
-                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label
-                  for="PasswordConfirmation"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password Confirmation
-                </label>
-
-                <input
-                  type="password"
-                  id="PasswordConfirmation"
-                  name="password_confirmation"
-                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6">
-                <label
-                  for="MarketingAccept"
-                  class="flex gap-4"
-                >
-                  <input
-                    type="checkbox"
-                    id="MarketingAccept"
-                    name="marketing_accept"
-                    class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
-                  />
-
-                  <span class="text-sm text-gray-700">
-                    I want to receive emails about events, product updates and company
-                    announcements.
-                  </span>
-                </label>
-              </div>
-
-              <div class="col-span-6">
-                <p class="text-sm text-gray-500">
-                  By creating an account, you agree to our
-                  <a
-                    href="#"
-                    class="text-gray-700 underline"
-                  >
-                    {" "}
-                    terms and conditions{" "}
-                  </a>
-                  and
-                  <a
-                    href="#"
-                    class="text-gray-700 underline"
-                  >
-                    privacy policy
-                  </a>
-                  .
-                </p>
-              </div>
-
-              <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-                  Create an account
-                </button>
-
-                <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Already have an account?
-                  <a
-                    href="#"
-                    class="text-gray-700 underline"
-                  >
-                    Log in
-                  </a>
-                  .
-                </p>
-              </div>
-            </form>
+        <section class="flex max-w-2xl flex-col bg-white sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
+          <div class="mx-auo my-5 flex h-10 flex-row justify-center">
+            <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+              <ApplePay />
+            </div>
+            <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+              <GooglePay />
+            </div>
+            <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+              <PayPal />
+            </div>
           </div>
+          <span class="relative flex justify-center py-4">
+            <div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"></div>
+            <span class="relative z-10 bg-white px-6">or</span>
+          </span>
+          <CreditCardForm />
         </section>
       </div>
     </section>

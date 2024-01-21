@@ -1,6 +1,10 @@
 import { Component } from "solid-js"
 
-const QuantityInput: Component = () => {
+type Val = {
+  value: number
+}
+
+const QuantityInput = (props: Val) => {
   return (
     <div>
       <label
@@ -20,7 +24,7 @@ const QuantityInput: Component = () => {
         <input
           type="number"
           id="Quantity"
-          value="1"
+          value={props.value}
           class="h-8 w-10 rounded border-gray-200 pl-2 sm:text-sm"
         />
         <button

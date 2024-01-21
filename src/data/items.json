@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": "01",
+      "thumb_src": "reishi_caps.jpg",
+      "title": "Reishi Capsules",
+      "price": 25,
+      "size": "Small",
+      "count": 2
+    },
+    {
+      "id": "02",
+      "thumb_src": "oyster_mushrooms.jpg",
+      "title": "King Oyster Mushrooms",
+      "price": 15,
+      "size": "Small",
+      "count": 1
+    },
+    {
+      "id": "03",
+      "thumb_src": "mushroom_coffee.jpg",
+      "title": "Gourmet Mushroom Coffee",
+      "price": 20,
+      "size": "Large",
+      "count": 1
+    },
+    {
+      "id": "04",
+      "thumb_src": "liquid_cultures.jpg",
+      "title": "Liquid Cultures",
+      "price": 18,
+      "size": "Medium",
+      "count": 3
+    }
+  ]
+}
