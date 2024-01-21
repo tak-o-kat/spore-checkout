@@ -34,8 +34,7 @@ const CreditCardForm = () => {
           <input
             type="number"
             placeholder="1234 1234 1234 1234"
-            data-inputmask="'mask': '9999 9999 9999 9999'"
-            class="w-full rounded-lg border border-gray-300 bg-white p-3"
+            class="w-full rounded-lg border border-gray-300 bg-white p-3 pe-32"
           />
         </div>
 
@@ -78,7 +77,7 @@ const CreditCardForm = () => {
 
           <input
             type="text"
-            placeholder="Address"
+            placeholder="12345 Micali Rd."
             class="w-full rounded-lg border border-gray-300 bg-white p-3"
           />
         </div>
