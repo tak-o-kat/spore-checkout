@@ -21,7 +21,7 @@ const CheckoutItem = (props: PropTypes) => {
       />
       <div class="flex flex-col justify-between space-y-4">
         <div class="flex flex-col space-y-1 text-sm font-medium">
-          <div class="text-black">{props.item.title}</div>
+          <div class="font-bold">{props.item.title}</div>
           <p class="">{`$${props.item.price}.00`}</p>
           <p class="text-gray-400">{props.item.size}</p>
           <p class="w-2">

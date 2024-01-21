@@ -137,7 +137,7 @@ const CreditCardForm = () => {
         </div>
         <div class="col-span-6">
           <button class="h-14 w-full rounded-lg border bg-primary text-primary-content">
-            Create an account
+            Secure Pay
           </button>
         </div>
       </form>
