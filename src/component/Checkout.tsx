@@ -4,7 +4,7 @@ import CheckoutItem from "./CheckoutItem"
 import items from "../data/items.json"
 import SporeDiscount from "./SporeDiscount"
 import TotalSummary from "./TotalSummary"
-import { ApplePay, GooglePay, PayPal } from "./PaymentIcons"
+import { ApplePay, GooglePay, PayPal, Lock } from "./PaymentIcons"
 import CreditCardForm from "./CreditCardForm"
 
 export type Items = {
@@ -22,7 +22,15 @@ const Checkout: Component = () => {
   )
   onMount(() => {})
   return (
-    <section class="my-10 bg-white">
+    <section class="bg-white">
+      <div class="-mt-10 flex items-center justify-center p-5">
+        <h2 class="flex flex-row text-2xl font-bold text-neutral-500">
+          <div class="pointer-events-none inset-y-0 start-0 flex items-center px-2">
+            <Lock />
+          </div>
+          Payment Processing
+        </h2>
+      </div>
       <div class="border bg-slate-50 lg:grid lg:min-h-full lg:grid-cols-12">
         {/* Order Summary */}
         <section class="flex flex-col space-x-6 bg-slate-50 lg:col-span-5 ">

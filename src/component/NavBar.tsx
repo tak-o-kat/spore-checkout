@@ -103,7 +103,7 @@ const NavBar: Component = () => {
           >
             Search
           </label>
-          <div class="relative w-[20rem]">
+          <div class="relative w-40 sm:w-[15rem] md:w-[20rem]">
             <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
               <svg
                 class="h-4 w-4 text-gray-500 dark:text-gray-400"
