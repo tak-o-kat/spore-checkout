@@ -24,7 +24,7 @@ const Checkout: Component = () => {
   return (
     <section class="bg-white">
       <div class="-mt-10 flex items-center justify-center p-5">
-        <h2 class="flex flex-row text-2xl font-bold text-neutral-500">
+        <h2 class="flex flex-row text-2xl font-bold text-neutral-600">
           <div class="pointer-events-none inset-y-0 start-0 flex items-center px-2">
             <Lock />
           </div>
