@@ -1,6 +1,6 @@
 import { createSignal, For } from "solid-js"
 import CheckoutItem from "./CheckoutItem"
-import SporeDiscount from "./SporeDiscount"
+import SporeDiscount from "./SporeDiscountButton"
 import TotalSummary from "./TotalSummary"
 import items from "../data/items.json"
 

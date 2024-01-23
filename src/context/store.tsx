@@ -1,12 +1,13 @@
-import { createStore } from "solid-js/store"
+import { SetStoreFunction, createStore } from "solid-js/store"
 import { createContext, useContext } from "solid-js"
-
-export type Store = {
-  state?: GlobalState
-}
 
 type GlobalState = {
   showSporeView: boolean
+}
+
+export type Store = {
+  state?: GlobalState
+  setState?: SetStoreFunction<GlobalState>
 }
 
 const store: GlobalState = {

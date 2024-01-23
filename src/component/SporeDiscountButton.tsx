@@ -1,9 +1,9 @@
 import type { Component } from "solid-js"
 import SporeIcon from "./SporeIcon"
-import { useGlobalContext, Store } from "../context/store"
+import { useGlobalContext, type Store } from "../context/store"
 
-const SporeDiscount: Component = () => {
-  const store: any = useGlobalContext()
+const SporeDiscountButton: Component = () => {
+  const store: Store = useGlobalContext()
   const switchView = () => {
     store.setState({
       showSporeView: !store.state.showSporeView,
@@ -14,7 +14,7 @@ const SporeDiscount: Component = () => {
     <div class="flex justify-center">
       <span class="flex items-center pr-2 text-base">Apply Discount with</span>
       <button
-        class="btn btn-link -ml-4 text-base text-secondary"
+        class="btn btn-link -ml-4 text-base text-secondary "
         onClick={() => switchView()}
       >
         SPORE
@@ -24,4 +24,4 @@ const SporeDiscount: Component = () => {
   )
 }
 
-export default SporeDiscount
+export default SporeDiscountButton
