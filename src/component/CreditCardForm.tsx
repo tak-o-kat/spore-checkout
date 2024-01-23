@@ -1,6 +1,6 @@
 import { Component } from "solid-js"
 
-const CreditCardForm = () => {
+const CreditCardForm: Component = () => {
   return (
     <div class="mx-auto px-6 sm:px-0">
       <form

@@ -152,7 +152,7 @@ const NavBar: Component = () => {
               </svg>
             </span>
             <span class="absolute -mt-6 ml-3.5 rounded-full bg-error px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
-              1
+              4
             </span>
           </a>
         </div>

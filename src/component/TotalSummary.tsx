@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onMount, Show, untrack } from "solid-js"
+import { createEffect, createSignal, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 
 type Total = {
@@ -17,12 +17,12 @@ const TotalSummary = (props: Total) => {
   })
 
   function precisionRound(number, precision) {
-    var factor = Math.pow(10, precision)
+    const factor = Math.pow(10, precision)
     return Math.round(number * factor) / factor
   }
 
   function hasDecimal(n: number) {
-    var result = n - Math.floor(n) !== 0
+    const result = n - Math.floor(n) !== 0
 
     if (result) return true
     else return false
