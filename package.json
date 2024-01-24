@@ -1,5 +1,5 @@
 {
-  "name": "vite-template-solid-ts-tw-daisyui-pwa",
+  "name": "spore-checkout",
   "version": "0.1.0",
   "description": "SolidJS template with TypeScript, TailwindCSS, DaisyUI, and PWA support.",
   "scripts": {
@@ -12,8 +12,8 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.11.5",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "autoprefixer": "^10.4.17",
     "daisyui": "^4.6.0",
     "eslint": "^8.56.0",
@@ -21,14 +21,16 @@
     "postcss": "^8.4.33",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "solid-devtools": "^0.29.2",
+    "solid-devtools": "^0.29.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite": "^4.5.2",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-solid": "^2.8.2"
+    "vite-plugin-solid": "^2.9.0"
   },
   "dependencies": {
+    "@algorandfoundation/algokit-utils": "^5.3.1",
+    "algosdk": "^2.7.0",
     "solid-algo-wallets": "^0.1.6",
     "solid-js": "^1.8.11"
   }

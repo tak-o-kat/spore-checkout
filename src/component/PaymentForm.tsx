@@ -6,13 +6,22 @@ const PaymentForm: Component = () => {
   return (
     <section class="flex max-w-2xl flex-col bg-white sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
       <div class="my-5 flex h-10 flex-row justify-center">
-        <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+        <div
+          class="tooltip tooltip-accent flex basis-1/3 cursor-pointer items-center justify-center"
+          data-tip="Apple Pay"
+        >
           <ApplePay />
         </div>
-        <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+        <div
+          class="tooltip tooltip-accent flex basis-1/3 cursor-pointer items-center justify-center"
+          data-tip="Google Pay"
+        >
           <GooglePay />
         </div>
-        <div class="flex basis-1/3 cursor-pointer items-center justify-center">
+        <div
+          class="tooltip tooltip-accent flex basis-1/3 cursor-pointer items-center justify-center"
+          data-tip="Pay Pal"
+        >
           <PayPal />
         </div>
       </div>

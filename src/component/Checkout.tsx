@@ -19,7 +19,7 @@ const Checkout: Component = () => {
           Payment Processing
         </h2>
       </div>
-      <div class="border bg-slate-50 lg:grid lg:min-h-full lg:grid-cols-12">
+      <div class="border  lg:grid lg:min-h-full lg:grid-cols-12">
         <OrderSummary />
         <Show
           when={store.state.showSporeView}
