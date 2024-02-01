@@ -14,7 +14,7 @@ export type Items = {
 }
 
 const OrderSummary = () => {
-  const [subTotal, setsubTotal] = createSignal(
+  const [subTotal, setSubTotal] = createSignal(
     items.products.map((p) => p.price * p.count).reduce((a, v) => a + v, 0),
   )
   return (
