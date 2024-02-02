@@ -4,7 +4,7 @@ import CreditCardForm from "./CreditCardForm"
 
 const PaymentForm: Component = () => {
   return (
-    <section class="flex max-w-2xl flex-col bg-white sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
+    <section class="flex max-w-2xl flex-col sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
       <div class="my-5 flex h-10 flex-row justify-center">
         <div
           class="tooltip tooltip-accent flex basis-1/3 cursor-pointer items-center justify-center"
