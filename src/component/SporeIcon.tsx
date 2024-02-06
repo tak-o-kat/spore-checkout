@@ -3,12 +3,10 @@ import type { Component } from "solid-js"
 const SporeIcon: Component = () => {
   return (
     <svg
-      fill="#f6cbd1"
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-201.87 -201.87 807.47 807.47"
-      stroke="#000000"
       stroke-width="0.004037300000000001"
       class="-ml-3 -mr-2 h-10 w-10"
     >

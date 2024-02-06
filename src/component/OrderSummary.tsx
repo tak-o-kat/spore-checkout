@@ -25,7 +25,7 @@ const OrderSummary = () => {
       >
         <For each={items.products}>{(item) => <CheckoutItem item={item} />}</For>
       </ul>
-      <div class="border-opacity-1 !-ml-px w-full border-t p-6">
+      <div class="border-opacity-1 !-ml-px w-full border-t fill-secondary p-6">
         <SporeDiscount />
         <TotalSummary total={subTotal()} />
       </div>

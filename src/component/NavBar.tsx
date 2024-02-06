@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 
 const NavBar: Component = () => {
   return (
-    <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
+    <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-primary shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
       <div class="flex w-full flex-wrap items-center justify-between px-3">
         {/*<!-- Hamburger button for mobile view -->*/}
         <button
@@ -51,7 +51,7 @@ const NavBar: Component = () => {
           </a>
           {/*<!-- Left navigation links */}
           <ul
-            class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
+            class="list-style-none mr-auto flex flex-col pl-0 text-neutral-600 lg:flex-row"
             data-te-navbar-nav-ref
           >
             <li
@@ -60,7 +60,7 @@ const NavBar: Component = () => {
             >
               {/*<!-- Dashboard link */}
               <a
-                class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                class="transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
                 href="#"
                 data-te-nav-link-ref
               >
@@ -73,7 +73,7 @@ const NavBar: Component = () => {
               data-te-nav-item-ref
             >
               <a
-                class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                class="transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
                 href="#"
                 data-te-nav-link-ref
               >
@@ -86,7 +86,7 @@ const NavBar: Component = () => {
               data-te-nav-item-ref
             >
               <a
-                class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                class="transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
                 href="#"
                 data-te-nav-link-ref
               >

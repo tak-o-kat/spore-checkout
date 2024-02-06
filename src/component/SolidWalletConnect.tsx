@@ -1,15 +1,11 @@
 import { For } from "solid-js"
-import { type WalletInterface } from "solid-algo-wallets"
+import { type WalletInterface, UseSolidAlgoWallets } from "solid-algo-wallets"
 
-type PropTypes = {
-  walletInterfaces: WalletInterface[]
-  connectWallet: (wallet: WalletInterface) => Promise<void>
-}
-
-const SolidWalletConnect = (props: PropTypes) => {
+const SolidWalletConnect = () => {
+  const { connectWallet, walletInterfaces } = UseSolidAlgoWallets
   return (
     <For
-      each={Object.values(props.walletInterfaces).filter(
+      each={Object.values(walletInterfaces).filter(
         (wallet) => !["MyAlgo", "MetaMask"].includes(wallet.name),
       )}
     >
@@ -17,7 +13,7 @@ const SolidWalletConnect = (props: PropTypes) => {
         <div class="flex py-1">
           <button
             class="btn btn-accent w-60 rounded-lg"
-            onClick={() => props.connectWallet(wallet)}
+            onClick={() => connectWallet(wallet)}
           >
             {wallet.image()}
           </button>
