@@ -16,7 +16,7 @@ type PropTypes = {
 const SelectSporeAmount = (props: PropTypes) => {
   const [sporeUsed, setSporeUsed] = createSignal(0)
   const [percent, setPercent] = createSignal(0)
-  const [isDisabled, setIsDisabled] = createSignal(false)
+  const [isDisabled, setIsDisabled] = createSignal(true)
   const [confirmedTxn, setConfirmedTxn] = createSignal("")
 
   const { address, transactionSigner } = UseSolidAlgoWallets
@@ -67,7 +67,7 @@ const SelectSporeAmount = (props: PropTypes) => {
   }
 
   return (
-    <div class="flex flex-col items-start justify-center gap-5 px-3">
+    <div class="flex flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
       <div class="flex flex-col px-6 sm:px-0">
         <p>
           Address: <span class="font-semibold">{ellipseString(address())}</span>
@@ -80,12 +80,12 @@ const SelectSporeAmount = (props: PropTypes) => {
           <span class="font-semibold">{`${(props.sporeAmount() / decimal).toPrecision(5)}`}</span>
         </p>
       </div>
-      <div class="flex w-full flex-col gap-4">
-        <div class="flex w-full items-center justify-center p-4 text-gray-400">
+      <div class="flex w-full flex-col gap-4 p-3">
+        <div class="flex items-center justify-center p-4 text-gray-400">
           <input
             type="number"
             placeholder="20"
-            class="w-[15rem] border-r bg-white pe-12 text-right text-5xl outline-none"
+            class="w-full border-r bg-white pe-12 text-right text-5xl outline-none sm:w-[15rem]"
             value={percent()}
             disabled
           />
@@ -93,7 +93,7 @@ const SelectSporeAmount = (props: PropTypes) => {
           <input
             type="number"
             placeholder="1000"
-            class="w-[15rem] bg-white ps-12 text-left text-5xl outline-none"
+            class="w-full bg-white ps-12 text-left text-5xl outline-none sm:w-[15rem]"
             value={sporeUsed()}
             disabled
           />
@@ -101,7 +101,7 @@ const SelectSporeAmount = (props: PropTypes) => {
             <SporeIcon />
           </span>
         </div>
-        <div class="col-span-6">
+        <div class="col-span-6 py-3">
           <input
             type="range"
             min="0"
@@ -120,12 +120,12 @@ const SelectSporeAmount = (props: PropTypes) => {
           </div>
         </div>
       </div>
-      <div class="flex w-full py-5">
+      <div class="flex w-full justify-center py-5 sm:w-[12rem]">
         <button
-          class="btn btn-accent h-14 w-full rounded-lg  border bg-accent text-accent-content sm:w-[12rem]"
+          class="btn btn-accent h-14 w-full  rounded-lg border bg-accent text-accent-content "
           disabled={isDisabled()}
         >
-          Send
+          Send Spore
         </button>
       </div>
     </div>

@@ -16,34 +16,26 @@ const DispenseSpore = (props: PropTypes) => {
   }
 
   return (
-    <div class="mx-auto flex w-full flex-col px-6 sm:px-0">
+    <div class="flex flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
       <form
         action="#"
         class="mt-2 flex flex-col"
       >
-        <p class="">
+        <p class="p=2">
           Address: <span class="font-semibold">{ellipseString(address())}</span>
         </p>
-        <p class="">
+        <p class="p-2">
           You currently have <span class="font-semibold">{props.sporeAmount() / decimal}</span>{" "}
           SPORE!
         </p>
 
-        <p class="text-red-400">
-          If your address hasn't opted into SPORE, it will do so when you dispense!
-        </p>
+        <p class="flex justify-center text-red-400">Will automatically opt-in to SPORE!</p>
         <div class="flex flex-col items-center justify-center gap-3 py-3">
           <button
             class="btn btn-primary h-14 w-[15rem] rounded-lg border bg-primary text-primary-content"
             onClick={() => dispense()}
           >
             Dispense
-          </button>
-          <button
-            class="btn btn-primary h-14 w-[15rem] rounded-lg border bg-primary text-primary-content"
-            onClick={() => disconnectWallet()}
-          >
-            Disconnect
           </button>
         </div>
       </form>

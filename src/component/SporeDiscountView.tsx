@@ -60,9 +60,9 @@ const SporeDiscountView: Component = () => {
   }
 
   return (
-    <section class="flex max-w-2xl flex-col sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
-      <div class="my-5 flex h-full max-w-2xl flex-col">
-        <div class="flex w-[35rem] items-center justify-center">
+    <section class="flex min-h-full w-screen flex-col sm:max-w-2xl sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
+      <div class="my-5 flex h-full max-w-2xl flex-col justify-center">
+        <div class="flex h-32 flex-col items-center justify-center">
           <ul class="steps w-full">
             <li class={`step ${currentStep() >= 1 && "step-neutral"}`}>Connect &#x200B</li>
             <li class={`step ${currentStep() >= 2 && "step-neutral"}`}>Get &#x200B</li>
@@ -70,12 +70,10 @@ const SporeDiscountView: Component = () => {
             <li class={`step ${currentStep() >= 4 && "step-neutral"}`}>Verify </li>
           </ul>
         </div>
-        <div class="my-[5rem] flex flex-1 flex-col items-center gap-2">
+        <div class="flex h-96 flex-col items-center justify-center gap-2 sm:h-full">
           <Switch>
             <Match when={currentStep() === 1}>
-              <div class="py-5">
-                <SolidWalletConnect />
-              </div>
+              <SolidWalletConnect />
             </Match>
             <Match when={currentStep() === 2}>
               <DispenseSpore
