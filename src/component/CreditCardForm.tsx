@@ -134,7 +134,7 @@ const CreditCardForm: Component = () => {
             <span class="label-text pl-2">Billing Address is the same as shipping address</span>
           </label>
         </div>
-        <div class="col-span-6">
+        <div class="col-span-6 pb-5 ">
           <button class="h-14 w-full rounded-lg border bg-primary text-primary-content">
             Secure Pay
           </button>

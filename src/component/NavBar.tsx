@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 
 const NavBar: Component = () => {
   return (
-    <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-primary shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
+    <nav class="flex-no-wrap relative flex min-h-16 w-full items-center bg-primary shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 sm:h-24 lg:flex-wrap lg:justify-start lg:py-4">
       <div class="flex w-full flex-wrap items-center justify-between px-3">
         {/*<!-- Hamburger button for mobile view -->*/}
         <button
@@ -96,7 +96,7 @@ const NavBar: Component = () => {
           </ul>
         </div>
 
-        <form>
+        <div class="flex">
           <label
             for="default-search"
             class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -129,7 +129,7 @@ const NavBar: Component = () => {
               required
             />
           </div>
-        </form>
+        </div>
 
         {/*<!-- Right elements */}
 
