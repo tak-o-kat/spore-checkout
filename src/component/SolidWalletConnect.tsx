@@ -1,5 +1,5 @@
 import { For } from "solid-js"
-import { type WalletInterface, UseSolidAlgoWallets } from "solid-algo-wallets"
+import { UseSolidAlgoWallets } from "solid-algo-wallets"
 
 const SolidWalletConnect = () => {
   const { connectWallet, walletInterfaces } = UseSolidAlgoWallets
@@ -7,13 +7,13 @@ const SolidWalletConnect = () => {
     <div class="flex w-full flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
       <For
         each={Object.values(walletInterfaces).filter(
-          (wallet) => !["MyAlgo", "MetaMask"].includes(wallet.name),
+          (wallet) => !["MyAlgo", "MetaMask", "WalletConnect", "Ledger"].includes(wallet.name),
         )}
       >
         {(wallet) => (
-          <div class="flex gap-4 py-1">
+          <div class="flex flex-col gap-1 py-1">
             <button
-              class="btn btn-accent w-60 rounded-lg"
+              class="btn w-60 rounded-lg border-none bg-gradient-to-r from-[#bfdbfe] to-[#a5f3fc] hover:bg-gradient-to-r hover:from-[#a5f3fc] hover:to-[#bfdbfe]"
               onClick={() => connectWallet(wallet)}
             >
               {wallet.image()}

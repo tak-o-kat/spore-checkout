@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 
 const NavBar: Component = () => {
   return (
-    <nav class="flex-no-wrap relative flex min-h-16 w-full items-center bg-primary shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 sm:h-24 lg:flex-wrap lg:justify-start lg:py-4">
+    <nav class="flex-no-wrap relative flex min-h-16 w-full items-center bg-slate-300 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 sm:h-24 lg:flex-wrap lg:justify-start lg:py-4">
       <div class="flex w-full flex-wrap items-center justify-between px-3">
         {/*<!-- Hamburger button for mobile view -->*/}
         <button
@@ -44,7 +44,7 @@ const NavBar: Component = () => {
           >
             <img
               src="/images/logo.png"
-              style="height: 40px"
+              style={{ height: "40px" }}
               alt="Solluna Mushroom Farms Logo"
               loading="lazy"
             />
@@ -151,7 +151,7 @@ const NavBar: Component = () => {
                 <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
               </svg>
             </span>
-            <span class="absolute -mt-6 ml-3.5 rounded-full bg-error px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
+            <span class="absolute -mt-6 ml-3.5 rounded-full bg-error px-[0.4em] py-[0.22em] text-[0.7rem] font-bold leading-none text-white">
               4
             </span>
           </a>

@@ -14,11 +14,11 @@ const SporeDiscountButton: Component = () => {
     <div class="flex justify-center">
       <span class="flex items-center pr-2 text-base">Apply Discount with</span>
       <button
-        class="btn btn-link -ml-4 text-base text-secondary "
+        class="btn btn-link -ml-5 text-base text-neutral"
         onClick={() => switchView()}
       >
         SPORE
-        <SporeIcon />
+        {/* <SporeIcon /> */}
       </button>
     </div>
   )
