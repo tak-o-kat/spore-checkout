@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-const defaultTheme = require("tailwindcss/defaultTheme")
+import defaultTheme from "tailwindcss/defaultTheme"
 
 const config: Config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,css,md,mdx,html,json,scss}"],
@@ -13,7 +13,9 @@ const config: Config = {
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
-  daisyui: { themes: ["pastel"] },
+  daisyui: {
+    themes: ["pastel"],
+  },
 }
 
 export default config

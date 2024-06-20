@@ -3,7 +3,7 @@ import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
 import SolidWalletConnect from "./SolidWalletConnect"
 import DispenseSpore from "./DispenseSpore"
 import SelectSporeAmount from "./SelectSporeAmount"
-import { Wallet } from "lucide-solid"
+import { Wallet, ArrowBigLeft, ArrowBigRight } from "lucide-solid"
 import { DispenserClient } from "./dapp/DispenserClient"
 import { VerifierClient } from "./dapp/VerifierClient"
 import VerifyTransaction from "./VerifyTransaction"
@@ -31,6 +31,7 @@ const SporeDiscountView: Component = () => {
   const [currentStep, setCurrentStep] = createSignal(1)
   const [sporeAmount, setSporeAmount] = createSignal(0)
   const [assetId, setAssetId] = createSignal(0)
+  const [activeNet, setActiveNet] = createSignal("--")
   const [verificationObject, setVerificationObject] = createStore<Verification>({})
   const { activeWallet, address, reconnectWallet, disconnectWallet } = UseSolidAlgoWallets
   const { algodClient, setActiveNetwork, networkNames, activeNetwork } = UseNetwork
@@ -60,7 +61,7 @@ const SporeDiscountView: Component = () => {
 
   console.log(`network: ${activeNetwork()}`)
 
-  const getState = async () => {
+  const getAppState = async () => {
     try {
       const state = await typedClient.getGlobalState()
       setAssetId(Number(state.assetId?.asNumber() || 0))
@@ -79,6 +80,7 @@ const SporeDiscountView: Component = () => {
   createEffect(() => {
     if (activeWallet()) {
       afterConnected()
+      setActiveNet(activeNetwork())
       setCurrentStep(2)
     } else {
       console.log("not connected")
@@ -88,13 +90,24 @@ const SporeDiscountView: Component = () => {
 
   const afterConnected = async () => {
     try {
-      await getState()
+      await getAppState()
       console.log(sporeAmount() / decimal)
     } catch (err) {
       // If we land here it means the account doesn't have the asset
       console.log(err)
       setSporeAmount(0)
     }
+  }
+
+  const copyAddress = () => {
+    navigator.clipboard.writeText(address())
+  }
+
+  const disconnect = async () => {
+    await disconnectWallet()
+    setSporeAmount(0)
+    setActiveNet("--")
+    setCurrentStep(1)
   }
 
   const next = () => {
@@ -111,39 +124,73 @@ const SporeDiscountView: Component = () => {
     <section class="flex min-h-full w-screen flex-col sm:max-w-2xl sm:px-12 lg:col-span-7 lg:px-10 lg:py-0">
       <div class="my-5 flex h-full max-w-2xl flex-col justify-center">
         <div class="flex h-32 flex-col items-center justify-center">
-          <ul class="steps w-full">
-            <li class={`step ${currentStep() >= 1 && "step-accent"}`}>Connect &#x200B</li>
-            <li class={`step ${currentStep() >= 2 && "step-accent"}`}>Dispense</li>
-            <li class={`step ${currentStep() >= 3 && "step-accent"}`}>Transact</li>
-            <li class={`step ${currentStep() >= 4 && "step-accent"}`}>Verify </li>
+          <ul
+            data-theme="gradients"
+            class="steps w-full"
+          >
+            <li class={`step ${currentStep() >= 1 && "step-accent text-teal-500"}`}>Connect</li>
+            <li class={`step ${currentStep() >= 2 && "step-accent text-teal-500"}`}>Dispense</li>
+            <li class={`step ${currentStep() >= 3 && "step-accent text-teal-500"}`}>Transact</li>
+            <li class={`step ${currentStep() >= 4 && "step-accent text-teal-500"}`}>Verify </li>
           </ul>
         </div>
         <span class="relative mt-2 flex justify-center">
           <div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75" />
           <span class="relative z-10 bg-white px-6" />
         </span>
-        <div>
-          <span class="flex justify-end p-2 pe-3 text-lg font-bold text-neutral-600">
-            <div class="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                class="btn btn-square btn-ghost"
-              >
-                <Wallet />
+        <div class="flex flex-row items-center justify-end">
+          <div class="flex flex-row gap-2">
+            <span class="font-semibold">Address:</span>
+            <span class="text-base">{ellipseString(address())}</span>
+          </div>
+
+          <div>
+            <span class="flex justify-end p-2 pe-3 text-lg font-bold text-neutral-600">
+              <div class="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  class="btn btn-square btn-ghost"
+                >
+                  <Wallet />
+                </div>
+                <ul
+                  tabIndex={0}
+                  class="menu dropdown-content z-[1] w-64 rounded-box bg-base-100 p-2 shadow"
+                >
+                  <li
+                    class=""
+                    onClick={() => copyAddress()}
+                  >
+                    <div class="flex flex-row justify-between gap-2">
+                      <span>{`Copy Address: `}</span>
+                      <span>{ellipseString(address())} </span>
+                    </div>
+                  </li>
+                  <li class="">
+                    <div class="flex flex-row justify-between gap-2">
+                      <span>Network:</span>
+                      <span>{activeNet()}</span>
+                    </div>
+                  </li>
+                  <li class="">
+                    <div class="flex flex-row justify-between gap-2">
+                      <span>Spore:</span>
+                      <span>{sporeAmount() / decimal}</span>
+                    </div>
+                  </li>
+                  <span class="my-2 flex items-center">
+                    <span class="h-px flex-1 bg-gray-300" />
+                  </span>
+                  <li class="">
+                    <a onClick={() => disconnect()}>Disconnect</a>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
-              >
-                <li class="">
-                  <a onClick={() => disconnectWallet()}>Disconnect</a>
-                </li>
-              </ul>
-            </div>
-          </span>
+            </span>
+          </div>
         </div>
-        <div class="flex h-32 flex-1 flex-col items-center justify-center gap-2 sm:h-full">
+        <div class="flex flex-col items-center justify-center gap-2 sm:flex-1">
           <Switch>
             <Match when={currentStep() === 1}>
               <SolidWalletConnect />
@@ -157,6 +204,7 @@ const SporeDiscountView: Component = () => {
                 assetId={assetId()}
                 setAssetId={setAssetId}
                 network={activeNetwork}
+                setCurrentStep={setCurrentStep}
               />
             </Match>
             <Match when={currentStep() === 3}>
@@ -176,16 +224,16 @@ const SporeDiscountView: Component = () => {
         </div>
         <div class="flex flex-row items-center justify-center gap-4">
           <button
-            class="btn h-14 w-40 rounded-lg border bg-primary text-primary-content"
+            class="bg-teal-zeal btn rounded-lg border"
             onClick={() => back()}
           >
-            Cancel
+            <ArrowBigLeft />
           </button>
           <button
-            class="btn btn-primary h-14 w-40 rounded-lg border bg-primary text-primary-content"
+            class="btn rounded-lg border"
             onClick={() => next()}
           >
-            Skip
+            <ArrowBigRight />
           </button>
         </div>
       </div>

@@ -1,11 +1,10 @@
-import { Accessor, Setter, createEffect, createSignal } from "solid-js"
+import { Accessor, Setter, createEffect, createSignal, onMount } from "solid-js"
 import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
 import { AtomicTransactionComposer, AppCreateTxn } from "algosdk"
 import { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account"
 import { ellipseString, decimal } from "./SporeDiscountView"
 import { type DispenserClient, Dispenser } from "./dapp/DispenserClient"
 import { type VerifierClient, Verifier } from "./dapp/VerifierClient"
-import { Transaction } from "algosdk"
 import * as algokit from "@algorandfoundation/algokit-utils"
 import algosdk from "algosdk"
 
@@ -19,21 +18,18 @@ type PropTypes = {
   assetId: DispenserDispenseArgs["assetId"]
   setAssetId: Setter<number>
   network: Accessor<string>
+  setCurrentStep: Setter<number>
 }
 
 const DispenseSpore = (props: PropTypes) => {
   const { address, transactionSigner } = UseSolidAlgoWallets
-  const { algodClient, setActiveNetwork, networkNames, activeNetwork } = UseNetwork
+  const { algodClient } = UseNetwork
   const [loading, setLoading] = createSignal(false)
 
   const sender = {
     addr: address(),
     signer: transactionSigner,
   }
-
-  setActiveNetwork(networkNames.filter((n) => n === "LocalNet")[0])
-
-  createEffect(() => {})
 
   const createApps = async () => {
     // make an app call to the contract
@@ -134,29 +130,24 @@ const DispenseSpore = (props: PropTypes) => {
     }
   }
 
+  createEffect(() => {
+    if (props.sporeAmount() > 50 * decimal) {
+      props.setCurrentStep(3)
+    }
+  })
+
   return (
     <div class="flex w-full flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
-      <p class="p=2">
-        Address: <span class="font-semibold">{ellipseString(address())}</span>
-      </p>
-      <p>
-        Network: <span class="font-semibold">{`${activeNetwork()}`}</span>
-      </p>
-      <p>
-        Spore:{" "}
-        <span class="font-semibold">{`${(props.sporeAmount() / decimal).toPrecision(5)}`}</span>
-      </p>
-
-      <p class="flex justify-center text-red-400">Will automatically opt-in to SPORE!</p>
+      <p class="flex justify-center text-base">The app will opt-in to SPORE if needed</p>
       <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
         <button
-          class="btn btn-primary h-14 w-[15rem] rounded-lg border bg-primary text-primary-content"
+          class="btn h-14 w-[15rem] rounded-lg border bg-primary bg-gradient-to-r from-[#fbcfe8] via-[#f0abfc] to-[#e879f9] text-primary-content"
           onClick={() => createApps()}
         >
           Create Apps
         </button>
         <button
-          class="btn btn-primary h-14 w-full rounded-lg border bg-primary text-primary-content lg:w-[15rem]"
+          class="btn h-14 w-full rounded-lg border bg-gradient-to-r from-[#fecdd3] via-[#fda4af] to-[#f87171] text-white lg:w-[15rem]"
           onClick={() => dispense()}
           disabled={loading()}
         >

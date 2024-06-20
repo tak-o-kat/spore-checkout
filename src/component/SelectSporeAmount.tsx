@@ -102,17 +102,11 @@ const SelectSporeAmount = (props: PropTypes) => {
       />
       <div class="flex flex-col px-6 sm:px-0">
         <p>
-          Address: <span class="font-semibold">{ellipseString(address())}</span>
-        </p>
-        <p>
-          Network: <span class="font-semibold">{`${activeNetwork()}`}</span>
-        </p>
-        <p>
           Spore: <span class="font-semibold">{`${props.sporeAmount() / decimal}`}</span>
         </p>
       </div>
 
-      <div class="flex w-full flex-col gap-4 p-3">
+      <div class="flex w-full flex-col justify-center gap-4 p-3">
         <div class="flex items-center justify-center p-4 text-gray-400">
           <input
             type="number"
@@ -151,13 +145,13 @@ const SelectSporeAmount = (props: PropTypes) => {
             <span>20%</span>
           </div>
         </div>
-        <div class="flex flex-row justify-center">
-          Send SPORE coin to get a discount on your purchase
-        </div>
+      </div>
+      <div class="flex items-center justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text p-5 text-center text-transparent">
+        Send SPORE coin to get a discount on your purchase
       </div>
       <div class="flex w-full justify-center py-5 sm:w-[12rem]">
         <button
-          class="btn btn-accent h-14 w-full  rounded-lg border bg-accent text-accent-content "
+          class="btn h-14 w-full rounded-lg border-none bg-gradient-to-r from-[#99f6e4] via-[#5eead4] to-[#2dd4bf] text-white"
           disabled={isDisabled()}
           onClick={sendTxn}
         >
