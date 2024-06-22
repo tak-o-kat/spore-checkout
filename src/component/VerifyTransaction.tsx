@@ -2,6 +2,7 @@ import algosdk from "algosdk"
 import { UseNetwork } from "solid-algo-wallets"
 import { Show, onMount, createSignal } from "solid-js"
 import { UserRound, ReceiptText, BadgeCheck, ArrowRightLeft } from "lucide-solid"
+import { ConfettiExplosion } from "solid-confetti-explosion"
 
 import { Verification, decimal } from "./SporeDiscountView"
 import { ellipseString } from "./SporeDiscountView"
@@ -13,7 +14,8 @@ type PropTypes = {
 
 const VerifyTransaction = (props: PropTypes) => {
   const [isLoading, setIsLoading] = createSignal(true)
-  const { algodClient, activeNetwork } = UseNetwork
+  const [verified, setVerified] = createSignal(false)
+  const { algodClient } = UseNetwork
 
   onMount(async () => {
     console.log(props.verificationObj)
@@ -30,15 +32,21 @@ const VerifyTransaction = (props: PropTypes) => {
       const rcvAddress = algosdk.encodeAddress(rcvArray)
       const sendAddress = algosdk.encodeAddress(sendArray)
 
-      console.warn(rcvAddress)
-      console.warn(sendAddress)
-      console.warn(assetID)
-      console.warn(assetAmountSent / decimal)
+      if (
+        rcvAddress === props.verificationObj.receiverAddress &&
+        sendAddress === props.verificationObj.senderAddress &&
+        assetID === props.verificationObj.assetId &&
+        assetAmountSent === props.verificationObj.assetAmountSent
+      ) {
+        setVerified(true)
+      }
+      // Need to match each prop with the txnID details given from algod
     } catch (err) {
       console.log(err.message)
     }
     setIsLoading(false)
   })
+
   return (
     <div class="flex flex-row items-center justify-center py-4">
       <div class="flex flex-col items-center justify-center gap-2">
@@ -46,8 +54,15 @@ const VerifyTransaction = (props: PropTypes) => {
           when={!isLoading()}
           fallback={<div>Loading...</div>}
         >
-          <div class="flex text-lg text-success">Successfully applied discount!</div>
-          <div class="flex p-4 text-sm">
+          <ConfettiExplosion
+            stageHeight={560}
+            stageWidth={700}
+            class="-mt-2"
+          />
+          <div class="flex items-center justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text text-center text-lg text-transparent">
+            Successfully applied discount!
+          </div>
+          <div class="flex p-4 text-sm ">
             Disconnect your wallet and proceed to our secured payment portal
           </div>
           <div class="stats stats-vertical bg-slate-50 shadow sm:stats-horizontal">
@@ -59,7 +74,7 @@ const VerifyTransaction = (props: PropTypes) => {
               <div class="stat-value w-32 text-xl ">
                 {ellipseString(props.verificationObj.senderAddress)}
               </div>
-              <div class="stat-desc flex flex-row items-center gap-2">
+              <div class="stat-desc flex flex-row items-center gap-2 ">
                 <BadgeCheck />
                 <span>Verfied</span>
               </div>
@@ -96,7 +111,7 @@ const VerifyTransaction = (props: PropTypes) => {
                 <SporeIcon />
               </div>
               <div class="stat-title">SPORE coin sent</div>
-              <div class="stat-value text-xl">{`${"asdf"} - ${props.verificationObj.assetAmountSent / decimal}`}</div>
+              <div class="stat-value text-xl">{`${props.verificationObj.discountPercent}% - ${props.verificationObj.assetAmountSent / decimal}`}</div>
               <div class="stat-desc flex flex-row items-center gap-2">
                 <BadgeCheck />
                 <span>Verfied</span>

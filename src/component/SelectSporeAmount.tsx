@@ -80,6 +80,7 @@ const SelectSporeAmount = (props: PropTypes) => {
     props.setVerificationObj({
       txnId: result.txIDs[0],
       assetAmountSent: sporeUsed() * decimal,
+      discountPercent: percent(),
       assetId: props.assetId(),
       receiverAddress: verifierAddress(),
       senderAddress: address(),
@@ -149,9 +150,9 @@ const SelectSporeAmount = (props: PropTypes) => {
       <div class="flex items-center justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text p-5 text-center text-transparent">
         Send SPORE coin to get a discount on your purchase
       </div>
-      <div class="flex w-full justify-center py-5 sm:w-[12rem]">
+      <div class="flex w-full justify-center py-5 sm:w-[15rem]">
         <button
-          class="btn h-14 w-full rounded-lg border-none bg-gradient-to-r from-[#99f6e4] via-[#5eead4] to-[#2dd4bf] text-white"
+          class="btn-grad-send h-14 w-full rounded-lg border-none sm:w-[15rem]"
           disabled={isDisabled()}
           onClick={sendTxn}
         >

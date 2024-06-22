@@ -147,7 +147,7 @@ const DispenseSpore = (props: PropTypes) => {
           Create Apps
         </button>
         <button
-          class="btn h-14 w-full rounded-lg border bg-gradient-to-r from-[#fecdd3] via-[#fda4af] to-[#f87171] text-white lg:w-[15rem]"
+          class="btn-grad-dispense h-14 w-[15rem] rounded-lg border "
           onClick={() => dispense()}
           disabled={loading()}
         >

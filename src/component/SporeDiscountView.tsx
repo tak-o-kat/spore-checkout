@@ -9,6 +9,9 @@ import { VerifierClient } from "./dapp/VerifierClient"
 import VerifyTransaction from "./VerifyTransaction"
 import { createStore } from "solid-js/store"
 
+const DISPENSER_APP_ID = 1001
+const VERIFIER_APP_ID = 1006
+
 export function ellipseString(string = "", width = 4): string {
   return `${string.slice(0, width)}...${string.slice(-width)}`
 }
@@ -23,6 +26,7 @@ export type Verification = {
   txnId?: string
   assetId?: number
   assetAmountSent?: number
+  discountPercent?: number
   receiverAddress?: string
   senderAddress?: string
 }
@@ -37,8 +41,6 @@ const SporeDiscountView: Component = () => {
   const { algodClient, setActiveNetwork, networkNames, activeNetwork } = UseNetwork
 
   // App IDs
-  const dispenserAppId = 1001
-  const verifierAppId = 1006
 
   setActiveNetwork(networkNames.filter((n) => n === "LocalNet")[0])
 
@@ -46,7 +48,7 @@ const SporeDiscountView: Component = () => {
   const typedClient = new DispenserClient(
     {
       resolveBy: "id",
-      id: dispenserAppId,
+      id: DISPENSER_APP_ID,
     },
     algodClient(),
   )
@@ -54,7 +56,7 @@ const SporeDiscountView: Component = () => {
   const verifierClient = new VerifierClient(
     {
       resolveBy: "id",
-      id: verifierAppId,
+      id: VERIFIER_APP_ID,
     },
     algodClient(),
   )
@@ -69,24 +71,9 @@ const SporeDiscountView: Component = () => {
       setSporeAmount(acctInfo["asset-holding"].amount)
       console.log(`assetID: ${state.assetId?.asNumber()}`)
     } catch (err) {
-      console.log(err)
+      console.log(err.message)
     }
   }
-
-  onMount(() => {
-    reconnectWallet()
-  })
-
-  createEffect(() => {
-    if (activeWallet()) {
-      afterConnected()
-      setActiveNet(activeNetwork())
-      setCurrentStep(2)
-    } else {
-      console.log("not connected")
-      setCurrentStep(1)
-    }
-  })
 
   const afterConnected = async () => {
     try {
@@ -120,18 +107,33 @@ const SporeDiscountView: Component = () => {
     setCurrentStep(() => currentStep() - 1)
   }
 
+  onMount(() => {
+    reconnectWallet()
+  })
+
+  createEffect(() => {
+    if (activeWallet()) {
+      afterConnected()
+      setActiveNet(activeNetwork())
+      setCurrentStep(2)
+    } else {
+      console.log("not connected")
+      setCurrentStep(1)
+    }
+  })
+
   return (
     <section class="flex min-h-full w-screen flex-col sm:max-w-2xl sm:px-12 lg:col-span-7 lg:px-10 lg:py-0">
       <div class="my-5 flex h-full max-w-2xl flex-col justify-center">
         <div class="flex h-32 flex-col items-center justify-center">
           <ul
             data-theme="gradients"
-            class="steps w-full"
+            class="steps w-full "
           >
-            <li class={`step ${currentStep() >= 1 && "step-accent text-teal-500"}`}>Connect</li>
-            <li class={`step ${currentStep() >= 2 && "step-accent text-teal-500"}`}>Dispense</li>
-            <li class={`step ${currentStep() >= 3 && "step-accent text-teal-500"}`}>Transact</li>
-            <li class={`step ${currentStep() >= 4 && "step-accent text-teal-500"}`}>Verify </li>
+            <li class={`step ${currentStep() >= 1 && "step-neutral text-slate-600"}`}>Connect</li>
+            <li class={`step ${currentStep() >= 2 && "step-neutral text-slate-600"}`}>Dispense</li>
+            <li class={`step ${currentStep() >= 3 && "step-neutral text-slate-600"}`}>Transact</li>
+            <li class={`step ${currentStep() >= 4 && "step-neutral text-slate-600"}`}>Verify </li>
           </ul>
         </div>
         <span class="relative mt-2 flex justify-center">
@@ -222,7 +224,7 @@ const SporeDiscountView: Component = () => {
             </Match>
           </Switch>
         </div>
-        <div class="flex flex-row items-center justify-center gap-4">
+        {/* <div class="flex flex-row items-center justify-center gap-4">
           <button
             class="bg-teal-zeal btn rounded-lg border"
             onClick={() => back()}
@@ -235,7 +237,7 @@ const SporeDiscountView: Component = () => {
           >
             <ArrowBigRight />
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   )
