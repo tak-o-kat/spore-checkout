@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 
 const CreditCardForm: Component = () => {
   return (
-    <div class="mx-auto px-6 sm:px-0">
+    <div class="mx-auto p-4 sm:px-0">
       <form
         action="#"
         class="mt-2 grid grid-cols-6 gap-6"
@@ -134,8 +134,8 @@ const CreditCardForm: Component = () => {
             <span class="label-text pl-2">Billing Address is the same as shipping address</span>
           </label>
         </div>
-        <div class="col-span-6 pb-5 ">
-          <button class="h-14 w-full rounded-lg border bg-primary text-primary-content">
+        <div class="col-span-6 flex flex-row justify-center">
+          <button class="btn-grad-pay h-14 w-full rounded-lg border bg-primary text-primary-content">
             Secure Pay
           </button>
         </div>

@@ -14,9 +14,10 @@ export type Items = {
 }
 
 const OrderSummary = () => {
-  const [subTotal, setSubTotal] = createSignal(
+  const [subTotal] = createSignal(
     items.products.map((p) => p.price * p.count).reduce((a, v) => a + v, 0),
   )
+
   return (
     <section class="flex flex-col space-x-6 bg-slate-50 lg:col-span-5 ">
       <ul

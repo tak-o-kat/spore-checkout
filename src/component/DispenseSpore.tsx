@@ -137,7 +137,7 @@ const DispenseSpore = (props: PropTypes) => {
   })
 
   return (
-    <div class="flex w-full flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
+    <div class="flex w-full flex-1 flex-col items-center justify-center p-2 sm:min-h-full sm:p-5">
       <p class="flex justify-center text-base">The app will opt-in to SPORE if needed</p>
       <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
         <button

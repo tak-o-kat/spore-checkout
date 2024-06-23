@@ -1,5 +1,4 @@
 import type { Component } from "solid-js"
-import SporeIcon from "./SporeIcon"
 import { useGlobalContext, type Store } from "../context/store"
 
 const SporeDiscountButton: Component = () => {
@@ -17,8 +16,7 @@ const SporeDiscountButton: Component = () => {
         class="btn btn-link -ml-5 text-base text-neutral"
         onClick={() => switchView()}
       >
-        SPORE
-        {/* <SporeIcon /> */}
+        SPORE \{" "}
       </button>
     </div>
   )

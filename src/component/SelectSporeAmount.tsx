@@ -97,7 +97,7 @@ const SelectSporeAmount = (props: PropTypes) => {
   }
 
   return (
-    <div class="flex flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
+    <div class="flex flex-1 flex-col items-center justify-center p-2 sm:min-h-full sm:p-5">
       <div
         class={`${sendingTxn() ? "visible" : "hidden"} absolute inset-0 z-10 flex w-full items-center justify-center opacity-0 transition-opacity`}
       />
@@ -112,7 +112,7 @@ const SelectSporeAmount = (props: PropTypes) => {
           <input
             type="number"
             placeholder="20"
-            class="w-full border-r bg-white pe-12 text-right text-5xl outline-none sm:w-[15rem]"
+            class="w-full border-r bg-white pe-12 text-right text-4xl outline-none sm:w-[15rem] sm:text-5xl"
             value={percent()}
             disabled
           />
@@ -120,7 +120,7 @@ const SelectSporeAmount = (props: PropTypes) => {
           <input
             type="number"
             placeholder="1000"
-            class="w-full bg-white ps-12 text-left text-5xl outline-none sm:w-[15rem]"
+            class="w-full bg-white ps-12 text-left text-4xl outline-none  sm:w-[15rem] sm:text-5xl"
             value={sporeUsed()}
             disabled
           />

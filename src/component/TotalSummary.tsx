@@ -1,15 +1,18 @@
 import { createEffect, createSignal, Show } from "solid-js"
 import { createStore } from "solid-js/store"
+import { ArrowBigRight } from "lucide-solid"
+
+import { useGlobalContext, type Store } from "../context/store"
 
 type Total = {
   total: number
 }
 
 const TotalSummary = (props: Total) => {
+  const store: Store = useGlobalContext()
   const [isCalc, setIsCalc] = createSignal(true)
-  const [percent, setPercent] = createSignal(5)
   const [totalSummary, setTotalSummary] = createStore({
-    subtotal: props.total,
+    subtotal: 0,
     discount: 0,
     taxes: 23.68,
     shipping: 6.0,
@@ -24,8 +27,9 @@ const TotalSummary = (props: Total) => {
   function hasDecimal(n: number) {
     const result = n - Math.floor(n) !== 0
 
-    if (result) return true
-    else return false
+    // if (result) return true
+    // else return false
+    return result
   }
 
   createEffect(() => {
@@ -33,17 +37,17 @@ const TotalSummary = (props: Total) => {
     // Use untrack() for createEffect when updating discount
     const taxRate = 0.0725
     const taxes = taxRate * totalSummary.subtotal
-    let discount: number
 
-    if (percent() > 0) {
-      // apply discount here
-      const decPercent = percent() * 0.01
-      discount = decPercent * totalSummary.subtotal
-    }
+    // if (store.state.percent > 0) {
+    //   // apply discount here
+    const decPercent = store.state.percent * 0.01
+    const discount = decPercent * totalSummary.subtotal
+    // }
     const total = taxes + totalSummary.subtotal + totalSummary.shipping - discount
 
     setTotalSummary({
       ...totalSummary,
+      subtotal: props.total,
       discount: discount,
       taxes: precisionRound(taxes, 2),
       shipping: precisionRound(totalSummary.shipping, 2),
@@ -69,7 +73,11 @@ const TotalSummary = (props: Total) => {
         </div>
         <div class="flex justify-between">
           <dt>Discount</dt>
-          <dd class="text-gray-800">{`${totalSummary.discount > 0 ? "-$" : "$"}${totalSummary.discount}`}</dd>
+          <dd class="flex flex-row items-center gap-3 text-gray-800">
+            <span class="">{`${store.state.percent > 0 ? `${store.state.percent}% off` : ""}`}</span>
+            <span class="">{store.state.percent > 0 && <ArrowBigRight class="h-5" />}</span>
+            <span class="font-semibold">{`${totalSummary.discount > 0 ? "-$" : "$"}${precisionRound(totalSummary.discount, 2).toFixed(2)}`}</span>
+          </dd>
         </div>
         <div class="flex justify-between">
           <dt>Taxes</dt>
@@ -80,13 +88,13 @@ const TotalSummary = (props: Total) => {
           <dd class="text-gray-800">
             $
             {hasDecimal(totalSummary.shipping)
-              ? totalSummary.shipping.toPrecision(4)
-              : `${totalSummary.shipping}.00`}
+              ? totalSummary.shipping.toPrecision(2)
+              : `${totalSummary.shipping.toFixed(2)}`}
           </dd>
         </div>
         <div class="flex items-center justify-between border-t pt-6 text-gray-900">
           <dt class="text-base">Total</dt>
-          <dd>${totalSummary.total}</dd>
+          <dd class="font-bold">${totalSummary.total.toFixed(2)}</dd>
         </div>
       </div>
     </Show>

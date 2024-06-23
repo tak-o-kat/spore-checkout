@@ -8,6 +8,7 @@ import { DispenserClient } from "./dapp/DispenserClient"
 import { VerifierClient } from "./dapp/VerifierClient"
 import VerifyTransaction from "./VerifyTransaction"
 import { createStore } from "solid-js/store"
+import { useGlobalContext, type Store } from "../context/store"
 
 const DISPENSER_APP_ID = 1001
 const VERIFIER_APP_ID = 1006
@@ -32,6 +33,8 @@ export type Verification = {
 }
 
 const SporeDiscountView: Component = () => {
+  const store: Store = useGlobalContext()
+
   const [currentStep, setCurrentStep] = createSignal(1)
   const [sporeAmount, setSporeAmount] = createSignal(0)
   const [assetId, setAssetId] = createSignal(0)
@@ -92,6 +95,12 @@ const SporeDiscountView: Component = () => {
 
   const disconnect = async () => {
     await disconnectWallet()
+    if (store.state.discountApplied) {
+      store.setState({
+        ...store.state,
+        showSporeView: false,
+      })
+    }
     setSporeAmount(0)
     setActiveNet("--")
     setCurrentStep(1)
@@ -128,7 +137,7 @@ const SporeDiscountView: Component = () => {
         <div class="flex h-32 flex-col items-center justify-center">
           <ul
             data-theme="gradients"
-            class="steps w-full "
+            class="steps w-full text-neutral-content"
           >
             <li class={`step ${currentStep() >= 1 && "step-neutral text-slate-600"}`}>Connect</li>
             <li class={`step ${currentStep() >= 2 && "step-neutral text-slate-600"}`}>Dispense</li>
@@ -154,7 +163,12 @@ const SporeDiscountView: Component = () => {
                   role="button"
                   class="btn btn-square btn-ghost"
                 >
-                  <Wallet />
+                  <div
+                    class="sm:tooltip-accent/5 sm:tooltip"
+                    data-tip="Account Settings"
+                  >
+                    <Wallet />
+                  </div>
                 </div>
                 <ul
                   tabIndex={0}
@@ -192,7 +206,7 @@ const SporeDiscountView: Component = () => {
             </span>
           </div>
         </div>
-        <div class="flex flex-col items-center justify-center gap-2 sm:flex-1">
+        <div class="flex flex-col items-center justify-center sm:flex-1">
           <Switch>
             <Match when={currentStep() === 1}>
               <SolidWalletConnect />

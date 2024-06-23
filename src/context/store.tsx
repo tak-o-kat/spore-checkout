@@ -3,6 +3,8 @@ import { createContext, useContext } from "solid-js"
 
 type GlobalState = {
   showSporeView: boolean
+  percent: number
+  discountApplied: boolean
 }
 
 export type Store = {
@@ -12,6 +14,8 @@ export type Store = {
 
 const store: GlobalState = {
   showSporeView: false,
+  percent: 0,
+  discountApplied: false,
 }
 
 const GlobalContext = createContext()
