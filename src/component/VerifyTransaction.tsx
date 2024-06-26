@@ -133,7 +133,8 @@ const VerifyTransaction = (props: PropTypes) => {
             </div>
           </Match>
           <Match when={!isLoading() && !verified()}>
-            <div>Something is wrong</div>
+            <div>Your transaction did not pass the verification tests</div>
+            <div>No Discount for you!</div>
           </Match>
         </Switch>
       </div>

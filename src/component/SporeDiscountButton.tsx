@@ -11,9 +11,9 @@ const SporeDiscountButton: Component = () => {
 
   return (
     <div class="flex justify-center">
-      <span class="flex items-center pr-2 text-base">Apply Discount with</span>
+      <span class="flex items-center pr-1 text-base">Apply Discount with</span>
       <button
-        class="btn btn-link -ml-5 text-base text-neutral"
+        class={`${store.state.discountApplied && "btn-disabled"} btn-ghost btn-link text-base text-neutral`}
         onClick={() => switchView()}
       >
         SPORE \{" "}
