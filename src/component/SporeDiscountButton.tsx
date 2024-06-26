@@ -16,7 +16,7 @@ const SporeDiscountButton: Component = () => {
         class={`${store.state.discountApplied && "btn-disabled"} btn-ghost btn-link text-base text-neutral`}
         onClick={() => switchView()}
       >
-        SPORE \{" "}
+        SPORE{" "}
       </button>
     </div>
   )
