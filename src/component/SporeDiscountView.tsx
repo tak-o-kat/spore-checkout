@@ -34,7 +34,6 @@ export type Verification = {
 
 const SporeDiscountView: Component = () => {
   const store: Store = useGlobalContext()
-  const [isLoading, setIsLoading] = createSignal(false)
   const [currentStep, setCurrentStep] = createSignal(1)
   const [sporeAmount, setSporeAmount] = createSignal(0)
   const [assetId, setAssetId] = createSignal(0)
@@ -121,7 +120,6 @@ const SporeDiscountView: Component = () => {
   })
 
   createEffect(() => {
-    setIsLoading(true)
     if (activeWallet()) {
       afterConnected()
       setActiveNet(activeNetwork())
@@ -130,7 +128,6 @@ const SporeDiscountView: Component = () => {
       console.log("not connected")
       setCurrentStep(1)
     }
-    setIsLoading(false)
   })
 
   return (

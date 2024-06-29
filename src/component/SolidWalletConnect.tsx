@@ -22,9 +22,9 @@ const SolidWalletConnect = () => {
         )}
       >
         {(wallet) => (
-          <div class="flex flex-col items-center justify-center gap-1 py-1">
+          <div class="flex w-full flex-col items-center justify-center gap-1 py-1">
             <button
-              class={`${store.state.discountApplied && "pointer-events-none"} ${isLoading() && "loading loading-spinner loading-sm"}  btn-grad-main flex w-60 flex-col items-center justify-center rounded-lg border-none text-center`}
+              class={`${store.state.discountApplied && "pointer-events-none"} ${isLoading() && "loading loading-spinner loading-sm"}  btn-grad-main flex w-full flex-col items-center justify-center rounded-lg border-none text-center sm:w-[15rem]`}
               onClick={() => {
                 connect(wallet)
               }}

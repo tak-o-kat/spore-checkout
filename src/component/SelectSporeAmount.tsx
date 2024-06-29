@@ -151,7 +151,7 @@ const SelectSporeAmount = (props: PropTypes) => {
       <div class="flex items-center justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text p-5 text-center text-transparent">
         Send SPORE coin to get a discount on your purchase
       </div>
-      <div class="flex w-full justify-center py-5 sm:w-[15rem]">
+      <div class="flex w-full justify-center py-5">
         <button
           class="btn-grad-main h-14 w-full rounded-lg border-none sm:w-[15rem]"
           disabled={isDisabled() || sendingTxn()}
