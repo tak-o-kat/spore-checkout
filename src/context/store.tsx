@@ -5,6 +5,7 @@ type GlobalState = {
   showSporeView: boolean
   percent: number
   discountApplied: boolean
+  isLoading: boolean
 }
 
 export type Store = {
@@ -16,6 +17,7 @@ const store: GlobalState = {
   showSporeView: false,
   percent: 0,
   discountApplied: false,
+  isLoading: true,
 }
 
 const GlobalContext = createContext()

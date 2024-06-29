@@ -1,4 +1,4 @@
-import { Accessor, Setter, createEffect, createSignal, onMount } from "solid-js"
+import { Accessor, Setter, Show, createEffect, createSignal } from "solid-js"
 import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
 import { AtomicTransactionComposer, AppCreateTxn } from "algosdk"
 import { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account"
@@ -22,9 +22,10 @@ type PropTypes = {
 }
 
 const DispenseSpore = (props: PropTypes) => {
+  const [isLoading, setIsLoading] = createSignal(true)
+  const [initialLoad, seInitalLoad] = createSignal(true)
   const { address, transactionSigner } = UseSolidAlgoWallets
   const { algodClient } = UseNetwork
-  const [loading, setLoading] = createSignal(false)
 
   const sender = {
     addr: address(),
@@ -89,7 +90,7 @@ const DispenseSpore = (props: PropTypes) => {
   }
 
   const dispense = async () => {
-    setLoading(true)
+    setIsLoading(true)
     try {
       try {
         await algodClient().accountAssetInformation(address(), Number(props.assetId)).do()
@@ -125,39 +126,53 @@ const DispenseSpore = (props: PropTypes) => {
       props.setSporeAmount(Number(acctInfo["asset-holding"].amount))
     } catch (err) {
       console.log(err)
-    } finally {
-      setLoading(false)
     }
+
+    setIsLoading(false)
   }
 
   createEffect(() => {
     if (props.sporeAmount() > 50 * decimal) {
       props.setCurrentStep(3)
     }
+    seInitalLoad(false)
+    setIsLoading(false)
   })
 
   return (
     <div class="flex w-full flex-1 flex-col items-center justify-center p-2 sm:min-h-full sm:p-5">
-      <p class="flex justify-center text-base">The app will opt-in to SPORE if needed</p>
-      <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
-        <button
+      <Show
+        when={!initialLoad()}
+        fallback={<span class="loading loading-spinner loading-lg text-info" />}
+      >
+        <div>
+          <p class="flex justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text p-5 text-center text-transparent">
+            The app will opt-in to SPORE coin automatically
+          </p>
+          <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
+            {/* <button
           class="btn h-14 w-[15rem] rounded-lg border bg-primary bg-gradient-to-r from-[#fbcfe8] via-[#f0abfc] to-[#e879f9] text-primary-content"
           onClick={() => createApps()}
         >
           Create Apps
-        </button>
-        <button
-          class="btn-grad-dispense h-14 w-[15rem] rounded-lg border "
-          onClick={() => dispense()}
-          disabled={loading()}
-        >
-          {loading() ? (
-            <span class="loading loading-spinner loading-sm">Dispensing</span>
-          ) : (
-            "Dispense"
-          )}
-        </button>
-      </div>
+        </button> */}
+            <button
+              class={`btn-grad-main h-14 w-[15rem] rounded-lg border`}
+              onClick={() => dispense()}
+              disabled={isLoading()}
+            >
+              {isLoading() ? (
+                <div class="pointer-events-none flex flex-row justify-center gap-2">
+                  <span class="loading loading-spinner loading-sm " />
+                  Dispensing
+                </div>
+              ) : (
+                "Dispense"
+              )}
+            </button>
+          </div>
+        </div>
+      </Show>
     </div>
   )
 }

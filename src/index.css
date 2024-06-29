@@ -10,68 +10,20 @@
   }
 }
 
-.btn-grad-dispense {
-  background-image: linear-gradient(to right, #dd5e89 0%, #f7bb97 51%, #dd5e89 100%);
-  margin: 10px;
-  padding: 15px 45px;
+.btn-grad-main {
+  background-image: linear-gradient(to right, #77a1d3 0%, #79cbca 51%, #77a1d3 100%);
+  margin: auto;
+  padding: 15px 15px;
   text-align: center;
-  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
-  display: block;
+  font-weight: 900;
 }
 
-.btn-grad-dispense:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
-.btn-grad-send {
-  background-image: linear-gradient(to right, #1cd8d2 0%, #93edc7 51%, #1cd8d2 100%);
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  display: block;
-}
-
-.btn-grad-send:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
-.btn-grad-send:disabled {
-  background-position: center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-  cursor: not-allowed;
-  opacity: 70%;
-}
-
-.btn-grad-pay {
-  background-image: linear-gradient(to right, #7474bf 0%, #348ac7 51%, #7474bf 100%);
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: #e5e4e2;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  display: block;
-}
-
-.btn-grad-pay:hover {
+.btn-grad-main:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;

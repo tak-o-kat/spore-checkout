@@ -109,7 +109,15 @@ const VerifyTransaction = (props: PropTypes) => {
                   <ArrowRightLeft />
                 </div>
                 <div class="stat-title">Transaction ID</div>
-                <div class="stat-value w-32 text-xl">{`${ellipseString(props.verificationObj.txnId)}`}</div>
+                <div class="stat-value w-32 text-xl">
+                  <a
+                    href={`https://testnet.blockpack.app/#/explorer/transaction/${props.verificationObj.txnId}`}
+                    target="_blank"
+                    class="text-blue-600 underline hover:decoration-solid"
+                  >
+                    {`${ellipseString(props.verificationObj.txnId)}`}
+                  </a>
+                </div>
                 <div class="stat-desc flex flex-row items-center gap-2">
                   <span class="text-accent">
                     <BadgeCheck />

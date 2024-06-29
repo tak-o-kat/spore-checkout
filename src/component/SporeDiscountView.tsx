@@ -10,8 +10,8 @@ import VerifyTransaction from "./VerifyTransaction"
 import { createStore } from "solid-js/store"
 import { useGlobalContext, type Store } from "../context/store"
 
-const DISPENSER_APP_ID = 1001
-const VERIFIER_APP_ID = 1006
+const DISPENSER_APP_ID = 692527663
+const VERIFIER_APP_ID = 692527721
 
 export function ellipseString(string = "", width = 4): string {
   return `${string.slice(0, width)}...${string.slice(-width)}`
@@ -34,7 +34,7 @@ export type Verification = {
 
 const SporeDiscountView: Component = () => {
   const store: Store = useGlobalContext()
-
+  const [isLoading, setIsLoading] = createSignal(false)
   const [currentStep, setCurrentStep] = createSignal(1)
   const [sporeAmount, setSporeAmount] = createSignal(0)
   const [assetId, setAssetId] = createSignal(0)
@@ -45,7 +45,7 @@ const SporeDiscountView: Component = () => {
 
   // App IDs
 
-  setActiveNetwork(networkNames.filter((n) => n === "LocalNet")[0])
+  setActiveNetwork(networkNames.filter((n) => n === "TestNet")[0])
 
   // Create DispenserClient and VerifierClient
   const typedClient = new DispenserClient(
@@ -121,6 +121,7 @@ const SporeDiscountView: Component = () => {
   })
 
   createEffect(() => {
+    setIsLoading(true)
     if (activeWallet()) {
       afterConnected()
       setActiveNet(activeNetwork())
@@ -129,6 +130,7 @@ const SporeDiscountView: Component = () => {
       console.log("not connected")
       setCurrentStep(1)
     }
+    setIsLoading(false)
   })
 
   return (

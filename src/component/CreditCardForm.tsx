@@ -135,7 +135,7 @@ const CreditCardForm: Component = () => {
           </label>
         </div>
         <div class="col-span-6 flex flex-row justify-center">
-          <button class="btn-grad-pay h-14 w-full rounded-lg border bg-primary text-primary-content">
+          <button class="btn-grad-main h-14 w-full rounded-lg border bg-primary text-primary-content">
             Secure Pay
           </button>
         </div>

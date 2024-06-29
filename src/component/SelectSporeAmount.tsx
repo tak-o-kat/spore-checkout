@@ -30,7 +30,7 @@ const SelectSporeAmount = (props: PropTypes) => {
   const [isDisabled, setIsDisabled] = createSignal(true)
   const [sendingTxn, setSendingTxn] = createSignal(false)
   const { address, transactionSigner } = UseSolidAlgoWallets
-  const { algodClient, activeNetwork } = UseNetwork
+  const { algodClient } = UseNetwork
 
   onMount(async () => {
     const ref = await props.verifierClient.appClient.getAppReference()
@@ -92,8 +92,8 @@ const SelectSporeAmount = (props: PropTypes) => {
       .do()
     props.setSporeAmount(Number(acctInfo["asset-holding"].amount))
 
-    setSendingTxn(false)
     props.setCurrentStep(4)
+    setSendingTxn(false)
   }
 
   return (
@@ -137,6 +137,7 @@ const SelectSporeAmount = (props: PropTypes) => {
             onInput={(e) => updateDiscount(e.currentTarget.value)}
             class="range range-accent range-lg"
             step="1"
+            disabled={sendingTxn()}
           />
           <div class="flex w-full justify-between px-2 text-xs">
             <span>0%</span>
@@ -152,11 +153,18 @@ const SelectSporeAmount = (props: PropTypes) => {
       </div>
       <div class="flex w-full justify-center py-5 sm:w-[15rem]">
         <button
-          class="btn-grad-send h-14 w-full rounded-lg border-none sm:w-[15rem]"
-          disabled={isDisabled()}
+          class="btn-grad-main h-14 w-full rounded-lg border-none sm:w-[15rem]"
+          disabled={isDisabled() || sendingTxn()}
           onClick={sendTxn}
         >
-          Send Spore
+          {sendingTxn() ? (
+            <div class="pointer-events-none flex flex-row justify-center gap-2">
+              <span class="loading loading-spinner loading-sm " />
+              Sending Spore
+            </div>
+          ) : (
+            "Send Spore"
+          )}
         </button>
       </div>
     </div>
