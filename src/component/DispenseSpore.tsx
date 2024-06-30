@@ -1,10 +1,8 @@
 import { Accessor, Setter, Show, createEffect, createSignal } from "solid-js"
 import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
-import { AtomicTransactionComposer, AppCreateTxn } from "algosdk"
-import { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account"
-import { ellipseString, decimal } from "./SporeDiscountView"
+import { decimal } from "./SporeDiscountView"
 import { type DispenserClient, Dispenser } from "./dapp/DispenserClient"
-import { type VerifierClient, Verifier } from "./dapp/VerifierClient"
+import { type VerifierClient } from "./dapp/VerifierClient"
 import * as algokit from "@algorandfoundation/algokit-utils"
 import algosdk from "algosdk"
 
@@ -32,63 +30,6 @@ const DispenseSpore = (props: PropTypes) => {
     signer: transactionSigner,
   }
 
-  const createApps = async () => {
-    // make an app call to the contract
-    console.log("Creating app")
-    try {
-      // Create the dispenser app
-      await props.typedClient.create.createApplication({}, { sender })
-      await props.typedClient.appClient.fundAppAccount({
-        sender,
-        amount: algokit.microAlgos(500_000),
-      })
-
-      await props.typedClient.createSporeAsset(
-        { name: "SPORE coin", unitName: "SPORE" },
-        {
-          sender,
-          sendParams: {
-            fee: algokit.microAlgos(2_000),
-          },
-        },
-      )
-      const appId = await props.typedClient.appClient.getAppReference()
-      const ref = await props.typedClient.appClient.getGlobalState()
-      const balance = await props.typedClient.getAssetId({}, { sender })
-      console.log(ref.assetId.value)
-      console.log(`Dispenser: ${appId.appId}`)
-      console.log(balance.return?.returnValue)
-
-      // Create the verifier app
-      await props.verifierClient.create.createApplication({}, { sender })
-      await props.verifierClient.appClient.fundAppAccount({
-        sender,
-        amount: algokit.microAlgos(1_000_000),
-      })
-
-      await props.verifierClient.initVerifier(
-        { assetId: BigInt(ref.assetId.value) },
-        {
-          sender,
-          sendParams: {
-            fee: algokit.microAlgos(2_000),
-            populateAppCallResources: true,
-          },
-        },
-      )
-
-      const verifierRef = await props.verifierClient.appClient.getAppReference()
-      const verifierState = await props.verifierClient.appClient.getGlobalState()
-
-      console.log(verifierState.assetId.value)
-      console.log(`Verifier: ${verifierRef.appId}`)
-
-      props.setAssetId(Number(ref.assetId.value))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   const dispense = async () => {
     setIsLoading(true)
     try {
@@ -105,6 +46,7 @@ const DispenseSpore = (props: PropTypes) => {
           amount: 0,
           suggestedParams: suggestedParams,
         })
+        // Send optInTxn
         await algokit.sendTransaction({ from: sender, transaction: optInTxn }, algodClient())
       }
 
@@ -127,16 +69,16 @@ const DispenseSpore = (props: PropTypes) => {
     } catch (err) {
       console.log(err)
     }
-
     setIsLoading(false)
   }
 
   createEffect(() => {
     if (props.sporeAmount() > 50 * decimal) {
       props.setCurrentStep(3)
+    } else {
+      seInitalLoad(false)
+      setIsLoading(false)
     }
-    seInitalLoad(false)
-    setIsLoading(false)
   })
 
   return (
@@ -150,12 +92,6 @@ const DispenseSpore = (props: PropTypes) => {
             The app will opt-in to SPORE coin automatically
           </p>
           <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
-            {/* <button
-          class="btn h-14 w-[15rem] rounded-lg border bg-primary bg-gradient-to-r from-[#fbcfe8] via-[#f0abfc] to-[#e879f9] text-primary-content"
-          onClick={() => createApps()}
-        >
-          Create Apps
-        </button> */}
             <button
               class={`btn-grad-main h-14 w-full rounded-lg border sm:w-[15rem]`}
               onClick={() => dispense()}

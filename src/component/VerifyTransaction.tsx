@@ -20,12 +20,10 @@ const VerifyTransaction = (props: PropTypes) => {
   const { algodClient } = UseNetwork
 
   onMount(async () => {
-    console.log(props.verificationObj)
     try {
       const pending = await algodClient()
         .pendingTransactionInformation(props.verificationObj.txnId)
         .do()
-      console.log(pending)
       const rcvArray = pending?.txn?.txn?.arcv
       const sendArray = pending?.txn?.txn?.snd
       const assetID = pending?.txn?.txn?.xaid

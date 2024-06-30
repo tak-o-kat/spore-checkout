@@ -10,7 +10,6 @@ import VerifyTransaction from "./VerifyTransaction"
 import { createStore } from "solid-js/store"
 import { useGlobalContext, type Store } from "../context/store"
 
-
 // App IDs
 const DISPENSER_APP_ID = 692527663
 const VERIFIER_APP_ID = 692527721
@@ -77,7 +76,8 @@ const SporeDiscountView: Component = () => {
   const afterConnected = async () => {
     try {
       await getAppState()
-      console.log(sporeAmount() / decimal)
+      setActiveNet(activeNetwork())
+      setCurrentStep(2)
     } catch (err) {
       // If we land here it means the account doesn't have the asset
       setSporeAmount(0)
@@ -108,8 +108,6 @@ const SporeDiscountView: Component = () => {
   createEffect(() => {
     if (activeWallet()) {
       afterConnected()
-      setActiveNet(activeNetwork())
-      setCurrentStep(2)
     } else {
       setCurrentStep(1)
     }
