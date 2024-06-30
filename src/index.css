@@ -28,3 +28,12 @@
   color: #fff;
   text-decoration: none;
 }
+
+.steps .step:after {
+  color: #70acc7;
+}
+
+.steps .step-neutral + .step-neutral:before,
+.steps .step-neutral:after {
+  color: white;
+}

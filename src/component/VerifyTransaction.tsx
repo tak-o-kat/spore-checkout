@@ -74,7 +74,7 @@ const VerifyTransaction = (props: PropTypes) => {
                   <UserRound />
                 </div>
                 <div class="stat-title">User Account</div>
-                <div class="stat-value w-32 text-xl ">
+                <div class="stat-value w-32 py-1 text-lg">
                   {ellipseString(props.verificationObj.senderAddress)}
                 </div>
                 <div class="stat-desc flex flex-row items-center gap-2 ">
@@ -90,7 +90,7 @@ const VerifyTransaction = (props: PropTypes) => {
                   <ReceiptText />
                 </div>
                 <div class="stat-title">Contract Account</div>
-                <div class="stat-value text-xl">
+                <div class="stat-value py-1 text-lg">
                   {ellipseString(props.verificationObj.receiverAddress)}
                 </div>
                 <div class="stat-desc flex flex-row items-center gap-2">
@@ -107,7 +107,7 @@ const VerifyTransaction = (props: PropTypes) => {
                   <ArrowRightLeft />
                 </div>
                 <div class="stat-title">Transaction ID</div>
-                <div class="stat-value w-32 text-xl">
+                <div class="stat-value w-32 py-1 text-lg">
                   <a
                     href={`https://testnet.blockpack.app/#/explorer/transaction/${props.verificationObj.txnId}`}
                     target="_blank"
@@ -128,7 +128,7 @@ const VerifyTransaction = (props: PropTypes) => {
                   <SporeIcon />
                 </div>
                 <div class="stat-title">SPORE coin sent</div>
-                <div class="stat-value text-xl">{`${props.verificationObj.discountPercent}% - ${props.verificationObj.assetAmountSent / decimal}`}</div>
+                <div class="stat-value py-1 text-lg">{`${props.verificationObj.discountPercent}% - ${props.verificationObj.assetAmountSent / decimal}`}</div>
                 <div class="stat-desc flex flex-row items-center gap-2">
                   <span class="text-accent">
                     <BadgeCheck />
