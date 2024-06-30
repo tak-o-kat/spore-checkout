@@ -3,13 +3,15 @@ import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
 import SolidWalletConnect from "./SolidWalletConnect"
 import DispenseSpore from "./DispenseSpore"
 import SelectSporeAmount from "./SelectSporeAmount"
-import { Wallet, ArrowBigLeft, ArrowBigRight } from "lucide-solid"
+import { Wallet } from "lucide-solid"
 import { DispenserClient } from "./dapp/DispenserClient"
 import { VerifierClient } from "./dapp/VerifierClient"
 import VerifyTransaction from "./VerifyTransaction"
 import { createStore } from "solid-js/store"
 import { useGlobalContext, type Store } from "../context/store"
 
+
+// App IDs
 const DISPENSER_APP_ID = 692527663
 const VERIFIER_APP_ID = 692527721
 
@@ -42,8 +44,6 @@ const SporeDiscountView: Component = () => {
   const { activeWallet, address, reconnectWallet, disconnectWallet } = UseSolidAlgoWallets
   const { algodClient, setActiveNetwork, networkNames, activeNetwork } = UseNetwork
 
-  // App IDs
-
   setActiveNetwork(networkNames.filter((n) => n === "TestNet")[0])
 
   // Create DispenserClient and VerifierClient
@@ -63,15 +63,12 @@ const SporeDiscountView: Component = () => {
     algodClient(),
   )
 
-  console.log(`network: ${activeNetwork()}`)
-
   const getAppState = async () => {
     try {
       const state = await typedClient.getGlobalState()
       setAssetId(Number(state.assetId?.asNumber() || 0))
       const acctInfo = await algodClient().accountAssetInformation(address(), assetId()).do()
       setSporeAmount(acctInfo["asset-holding"].amount)
-      console.log(`assetID: ${state.assetId?.asNumber()}`)
     } catch (err) {
       console.log(err.message)
     }
@@ -83,7 +80,6 @@ const SporeDiscountView: Component = () => {
       console.log(sporeAmount() / decimal)
     } catch (err) {
       // If we land here it means the account doesn't have the asset
-      console.log(err)
       setSporeAmount(0)
     }
   }
@@ -105,16 +101,6 @@ const SporeDiscountView: Component = () => {
     setCurrentStep(1)
   }
 
-  const next = () => {
-    if (currentStep() === 4) return
-    setCurrentStep(() => currentStep() + 1)
-  }
-
-  const back = () => {
-    if (currentStep() === 1) return
-    setCurrentStep(() => currentStep() - 1)
-  }
-
   onMount(() => {
     reconnectWallet()
   })
@@ -125,7 +111,6 @@ const SporeDiscountView: Component = () => {
       setActiveNet(activeNetwork())
       setCurrentStep(2)
     } else {
-      console.log("not connected")
       setCurrentStep(1)
     }
   })
