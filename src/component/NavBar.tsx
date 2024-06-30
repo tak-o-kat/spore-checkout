@@ -4,9 +4,9 @@ const NavBar: Component = () => {
   const bgColor = "bg-[#1c2841]"
   return (
     <nav
-      class={`${bgColor} flex-no-wrap relative flex min-h-16 w-full items-center shadow-md shadow-black/5 sm:h-24 lg:flex-wrap lg:justify-start lg:py-4`}
+      class={`${bgColor} flex-no-wrap relative flex h-20 w-full items-center py-2 shadow-md shadow-black/5 sm:h-20 lg:flex-wrap lg:justify-start`}
     >
-      <div class="flex w-full flex-wrap items-center justify-between px-3">
+      <div class="flex w-full flex-row items-center justify-between px-3">
         {/*<!-- Hamburger button for mobile view -->*/}
         <button
           class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
@@ -99,14 +99,14 @@ const NavBar: Component = () => {
           </ul>
         </div>
 
-        <div class="flex">
+        <div class="mr-0 flex sm:mr-3">
           <label
             for="default-search"
             class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Search
           </label>
-          <div class="relative w-40 sm:w-[15rem] md:w-[20rem]">
+          <div class="relative w-[15rem] sm:w-[18rem] md:w-[20rem]">
             <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
               <svg
                 class="h-4 w-4 text-gray-500 dark:text-gray-400"
@@ -136,7 +136,7 @@ const NavBar: Component = () => {
 
         {/*<!-- Right elements */}
 
-        <div class="relative ml-5 flex items-center">
+        <div class="relative flex items-center">
           {/*<!-- Container with two dropdown menus */}
 
           {/*<!-- Cart Icon */}
