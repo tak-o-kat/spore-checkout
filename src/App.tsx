@@ -1,6 +1,7 @@
 import type { Component } from "solid-js"
 import NavBar from "./component/NavBar"
 import Checkout from "./component/Checkout"
+import Footer from "./component/Footer"
 
 const App: Component = () => {
   return (
@@ -9,6 +10,7 @@ const App: Component = () => {
       <main class="mx-auto font-roboto selection:flex">
         <Checkout />
       </main>
+      <Footer />
     </div>
   )
 }
