@@ -1,7 +1,7 @@
 import { Component } from "solid-js"
 
 const NavBar: Component = () => {
-  const bgColor = "bg-[#1c2841]"
+  const bgColor = "bg-[#1E7590]" // #1c2841
   return (
     <nav
       class={`${bgColor} flex-no-wrap relative flex h-20 w-full items-center py-2 shadow-md shadow-black/5 sm:h-20 lg:flex-wrap lg:justify-start`}
