@@ -5,9 +5,9 @@ import Footer from "./component/Footer"
 
 const App: Component = () => {
   return (
-    <div class="flex h-screen w-full flex-col bg-base-100 pb-5 text-base-content">
+    <div class="flex h-screen w-full flex-col justify-between bg-base-100 pb-5 text-base-content">
       <NavBar />
-      <main class="mx-auto font-roboto selection:flex">
+      <main class="mx-auto mb-auto font-roboto selection:flex">
         <Checkout />
       </main>
       <Footer />

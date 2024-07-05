@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
-    <footer class=" bg-white sm:my-10 sm:py-4">
+    <footer class="mt-2 bg-white py-4 sm:py-2">
       <div class="mx-auto">
-        <div class="m-8 border-t border-none sm:m-5 sm:flex sm:items-center sm:justify-between sm:border-gray-100">
-          <ul class="flex flex-wrap justify-center gap-4 px-5 text-xs sm:px-20 lg:justify-end">
+        <div class="mx-4 gap-3 border-t border-none sm:flex sm:items-center sm:justify-between sm:border-gray-100">
+          <ul class="flex flex-wrap justify-center gap-4 px-3 text-xs sm:px-5 lg:justify-end">
             <li>
               <a
                 href="#"
@@ -35,7 +35,7 @@ const Footer = () => {
             </li>
           </ul>
 
-          <ul class="mt-8 flex justify-center gap-6 px-5 sm:mt-0 sm:px-20 lg:justify-end">
+          <ul class="mt-2 flex justify-center gap-4 px-3 sm:mt-0 sm:px-5 lg:justify-end">
             <li>
               <a
                 href="#"
