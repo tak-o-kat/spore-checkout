@@ -1,7 +1,7 @@
 import { Component } from "solid-js"
 
 const NavBar: Component = () => {
-  const bgColor = "bg-[#1E7590]" // #1c2841
+  const bgColor = "bg-[#FEFFFE]" // #1c2841
   return (
     <nav
       class={`${bgColor} flex-no-wrap relative flex h-20 w-full items-center py-2 shadow-md shadow-black/5 sm:h-20 lg:flex-wrap lg:justify-start`}
@@ -9,7 +9,7 @@ const NavBar: Component = () => {
       <div class="flex w-full flex-row items-center justify-between px-3">
         {/*<!-- Hamburger button for mobile view -->*/}
         <button
-          class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+          class="block border-0 bg-transparent px-2 text-[#2D2CF0] hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
           type="button"
           data-te-collapse-init
           data-te-target="#navbarSupportedContent1"
@@ -54,7 +54,7 @@ const NavBar: Component = () => {
           </a>
           {/*<!-- Left navigation links */}
           <ul
-            class="list-style-none mr-auto flex flex-col gap-5 pl-0 text-neutral-50 lg:flex-row"
+            class="list-style-none mr-auto flex flex-col gap-5 pl-0 text-sm font-medium text-[#2D2CF0] lg:flex-row"
             data-te-navbar-nav-ref
           >
             <li
@@ -144,7 +144,7 @@ const NavBar: Component = () => {
             class="mr-4 text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
             href="#"
           >
-            <span class="flex-no-shrink h-10 w-10 fill-neutral-50 [&>svg]:w-5">
+            <span class="flex-no-shrink h-10 w-10 fill-[#2D2CF0] [&>svg]:w-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
