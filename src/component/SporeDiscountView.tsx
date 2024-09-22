@@ -191,6 +191,20 @@ const SporeDiscountView: Component = () => {
         <div class="flex flex-col items-center justify-center sm:flex-1">
           <Switch>
             <Match when={currentStep() === 1}>
+              <div>
+                <h2 class="flex flex-col text-sm font-bold text-neutral-600">
+                  If you do not have any testnet algo please visit the TestNet Dispenser
+                  <a
+                    class="flex flex-row justify-center gap-1 text-base text-blue-500 visited:text-purple-500 hover:text-blue-700"
+                    href="https://bank.testnet.algorand.network/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    Dispenser{" "}
+                  </a>
+                </h2>
+              </div>
               <SolidWalletConnect />
             </Match>
             <Match when={currentStep() === 2}>

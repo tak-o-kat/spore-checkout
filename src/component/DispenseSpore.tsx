@@ -93,7 +93,7 @@ const DispenseSpore = (props: PropTypes) => {
           </p>
           <div class="flex w-full flex-col items-center justify-center gap-3 py-3">
             <button
-              class={`btn-grad-main h-14 w-full rounded-lg border sm:w-[15rem]`}
+              class={`btn-grad-main h-14 w-full cursor-pointer rounded-lg border sm:w-[15rem]`}
               onClick={() => dispense()}
               disabled={isLoading()}
             >

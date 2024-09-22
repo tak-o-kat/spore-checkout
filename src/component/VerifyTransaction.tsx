@@ -3,6 +3,7 @@ import { UseNetwork } from "solid-algo-wallets"
 import { Switch, Match, onMount, createSignal } from "solid-js"
 import { UserRound, ReceiptText, BadgeCheck, ArrowRightLeft } from "lucide-solid"
 import { ConfettiExplosion } from "solid-confetti-explosion"
+import { UseSolidAlgoWallets } from "solid-algo-wallets"
 
 import { Verification, decimal } from "./SporeDiscountView"
 import { ellipseString } from "./SporeDiscountView"
@@ -15,9 +16,20 @@ type PropTypes = {
 
 const VerifyTransaction = (props: PropTypes) => {
   const store: Store = useGlobalContext()
+  const { disconnectWallet } = UseSolidAlgoWallets
   const [isLoading, setIsLoading] = createSignal(true)
   const [verified, setVerified] = createSignal(false)
   const { algodClient } = UseNetwork
+
+  const disconnect = async () => {
+    await disconnectWallet()
+    if (store.state.discountApplied) {
+      store.setState({
+        ...store.state,
+        showSporeView: false,
+      })
+    }
+  }
 
   onMount(async () => {
     try {
@@ -65,7 +77,15 @@ const VerifyTransaction = (props: PropTypes) => {
             <div class="flex items-center justify-center bg-gradient-to-r from-[#fa8cff] via-[#9182ff] to-[#0476ff] bg-clip-text text-center text-lg text-transparent">
               Successfully applied discount!
             </div>
-            <div class="flex items-center justify-center p-4 text-center text-sm">
+            <div class="flex w-full justify-center">
+              <button
+                class="btn-grad-main h-14 w-full cursor-pointer rounded-lg border-none sm:w-[15rem]"
+                onClick={() => disconnect()}
+              >
+                Disconnect
+              </button>
+            </div>
+            <div class="flex items-center justify-center p-2 text-center text-sm">
               Disconnect your wallet and proceed to our secured payment portal
             </div>
             <div class="stats stats-vertical bg-slate-50 shadow sm:stats-horizontal">

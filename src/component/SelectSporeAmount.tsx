@@ -3,7 +3,7 @@ import { createSignal, onMount, createMemo } from "solid-js"
 import { type SetStoreFunction } from "solid-js/store"
 
 import { UseSolidAlgoWallets, UseNetwork } from "solid-algo-wallets"
-import { ellipseString, decimal, Verification } from "./SporeDiscountView"
+import { decimal, Verification } from "./SporeDiscountView"
 import { TransactionSignerAccount } from "@algorandfoundation/algokit-utils/types/account"
 import * as algokit from "@algorandfoundation/algokit-utils"
 import {
@@ -153,7 +153,7 @@ const SelectSporeAmount = (props: PropTypes) => {
       </div>
       <div class="flex w-full justify-center py-5">
         <button
-          class="btn-grad-main h-14 w-full rounded-lg border-none sm:w-[15rem]"
+          class="btn-grad-main h-14 w-full cursor-pointer rounded-lg border-none sm:w-[15rem]"
           disabled={isDisabled() || sendingTxn()}
           onClick={sendTxn}
         >

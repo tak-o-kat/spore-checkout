@@ -6,11 +6,15 @@ const SolidWalletConnect = () => {
   const store: Store = useGlobalContext()
   const { connectWallet, walletInterfaces } = UseSolidAlgoWallets
 
+  console.log(walletInterfaces)
+
   return (
     <div class="flex w-full flex-1 flex-col items-center justify-center p-5 sm:min-h-full">
+      <span class="text-xl font-bold text-neutral-700">TestNet Only!</span>
       <For
         each={Object.values(walletInterfaces).filter(
-          (wallet) => !["MyAlgo", "MetaMask", "WalletConnect", "Ledger"].includes(wallet.name),
+          (wallet) =>
+            !["MyAlgo", "MetaMask", "WalletConnect", "LocalNet KMD"].includes(wallet.name),
         )}
       >
         {(wallet) => (
