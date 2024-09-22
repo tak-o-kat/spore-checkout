@@ -66,7 +66,7 @@ const VerifyTransaction = (props: PropTypes) => {
 
   return (
     <div class="flex flex-row items-center justify-center py-4">
-      <div class="flex flex-col items-center justify-center gap-2">
+      <div class="flex flex-col items-center justify-center gap-2 px-4">
         <Switch fallback={<div>Loading...</div>}>
           <Match when={!isLoading() && verified()}>
             <ConfettiExplosion
@@ -88,7 +88,7 @@ const VerifyTransaction = (props: PropTypes) => {
             <div class="flex items-center justify-center p-2 text-center text-sm">
               Disconnect your wallet and proceed to our secured payment portal
             </div>
-            <div class="stats stats-vertical bg-slate-50 shadow sm:stats-horizontal">
+            <div class="stats stats-vertical w-full bg-slate-50 shadow sm:stats-horizontal">
               <div class="stat">
                 <div class="stat-figure text-neutral">
                   <UserRound />
@@ -121,7 +121,7 @@ const VerifyTransaction = (props: PropTypes) => {
                 </div>
               </div>
             </div>
-            <div class="stats stats-vertical bg-slate-50 shadow sm:stats-horizontal">
+            <div class="stats stats-vertical w-full bg-slate-50 shadow sm:stats-horizontal">
               <div class="stat">
                 <div class="stat-figure fill-current text-neutral">
                   <ArrowRightLeft />
